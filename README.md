@@ -1,11 +1,25 @@
-# ESRGAN (Enhanced SRGAN) [[Paper]](https://arxiv.org/abs/1809.00219) [[BasicSR]](https://github.com/xinntao/BasicSR) 
-## :smiley: Training codes are in [BasicSR](https://github.com/xinntao/BasicSR) repo.
+## ESRGAN (Enhanced SRGAN) [[BasicSR]](https://github.com/xinntao/BasicSR) [[EDVR]](https://github.com/xinntao/EDVR) [[DNI]](https://xinntao.github.io/projects/DNI)
+
+## We have merged the training codes of ESRGAN into [MMSR](https://github.com/open-mmlab/mmsr) :smile:
+
+MMSR is an open source image and video super-resolution toolbox based on PyTorch. It is a part of the [open-mmlab](https://github.com/open-mmlab) project developed by [Multimedia Laboratory, CUHK](http://mmlab.ie.cuhk.edu.hk/). MMSR is based on our previous projects: [BasicSR](https://github.com/xinntao/BasicSR), [ESRGAN](https://github.com/xinntao/ESRGAN), and [EDVR](https://github.com/xinntao/EDVR).
+
+We have simplified the network structure file.<br/>
+You can convert the previously save models (`*.pth`) with the script `transer_RRDB_models.py`;<br/>
+If you want to use the old arch, you can find it [here](https://github.com/xinntao/ESRGAN/releases/tag/old-arch).
+
+
+---
+Check out our new work on:<br/>
+1. **Video Super-Resolution**: [`EDVR: Video Restoration with Enhanced Deformable Convolutional Networks`](https://xinntao.github.io/projects/EDVR), which has won all four tracks in NTIRE 2019 Challenges on Video Restoration and Enhancement (CVPR19 Workshops).
+2. **DNI (CVPR19)**: [`Deep Network Interpolation for Continuous Imagery Effect Transition`](https://xinntao.github.io/projects/DNI)
+---
+
+
 ### Enhanced Super-Resolution Generative Adversarial Networks
 By Xintao Wang, [Ke Yu](https://yuke93.github.io/), Shixiang Wu, [Jinjin Gu](http://www.jasongt.com/), Yihao Liu, [Chao Dong](https://scholar.google.com.hk/citations?user=OSDCB0UAAAAJ&hl=en), [Yu Qiao](http://mmlab.siat.ac.cn/yuqiao/), [Chen Change Loy](http://personal.ie.cuhk.edu.hk/~ccloy/)
 
-This repo only provides simple testing codes, pretrained models and the network strategy demo. 
-
-### **For full training and testing codes, please refer to  [BasicSR](https://github.com/xinntao/BasicSR).**
+This repo only provides simple testing codes, pretrained models and the network strategy demo.  For full training and testing codes, please refer to  [BasicSR](https://github.com/xinntao/BasicSR).
 
 We won the first place in [PIRM2018-SR competition](https://www.pirm2018.org/PIRM-SR.html) (region 3) and got the best perceptual index.
 The paper is accepted to [ECCV2018 PIRM Workshop](https://pirm2018.org/).
@@ -49,7 +63,7 @@ The **RRDB_PSNR** PSNR_oriented model trained with DF2K dataset (a merged datase
 ## Quick Test
 #### Dependencies
 - Python 3
-- [PyTorch >= 0.4.0](https://pytorch.org/)
+- [PyTorch >= 1.0](https://pytorch.org/) (CUDA version >= 7.5 if installing with CUDA. [More details](https://pytorch.org/get-started/previous-versions/))
 - Python packages:  `pip install numpy opencv-python`
 
 ### Test models
@@ -60,10 +74,9 @@ cd ESRGAN
 ```
 2. Place your own **low-resolution images** in `./LR` folder. (There are two sample images - baboon and comic). 
 3. Download pretrained models from [Google Drive](https://drive.google.com/drive/u/0/folders/17VYV_SoZZesU6mbxz2dMAIccSSlqLecY) or [Baidu Drive](https://pan.baidu.com/s/1-Lh6ma-wXzfH8NqeBtPaFQ). Place the models in `./models`. We provide two models with high perceptual quality and high PSNR performance (see [model list](https://github.com/xinntao/ESRGAN/tree/master/models)).
-4. Run test. We provide ESRGAN model and RRDB_PSNR model.
+4. Run test. We provide ESRGAN model and RRDB_PSNR model and you can config in the `test.py`.
 ```
-python test.py models/RRDB_ESRGAN_x4.pth
-python test.py models/RRDB_PSNR_x4.pth
+python test.py
 ```
 5. The results are in `./results` folder.
 ### Network interpolation demo
