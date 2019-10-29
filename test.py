@@ -4,10 +4,22 @@ import cv2
 import numpy as np
 import torch
 import RRDBNet_arch as arch
+import sys
 
 model_path = 'models/RRDB_ESRGAN_x4.pth'  # models/RRDB_ESRGAN_x4.pth OR models/RRDB_PSNR_x4.pth
-device = torch.device('cuda')  # if you want to run on CPU, change 'cuda' -> cpu
-# device = torch.device('cpu')
+# philipedwards change begin
+# Instructions say that this already existed, but I couldn't find it.
+# This allows you to specify the model as the first positional argument
+if len(sys.argv) > 1:
+    print("model specified: " + sys.argv[1])
+    model_path = sys.argv[1]
+# philipedwards change end
+
+# philipedwards change begin
+# default to CPU based processing. Slower but more portable
+#device = torch.device('cuda')  # if you want to run on CPU, change 'cuda' -> cpu
+device = torch.device('cpu')
+# philipedwards change end
 
 test_img_folder = 'LR/*'
 
