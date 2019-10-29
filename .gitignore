@@ -1,5 +1,7 @@
 # folder
 .vscode
+LR/
+results/
 
 # file type
 *.svg
