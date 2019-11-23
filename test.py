@@ -6,23 +6,25 @@ import torch
 import RRDBNet_arch as arch
 import sys
 
-model_path = 'models/RRDB_ESRGAN_x4.pth'  # models/RRDB_ESRGAN_x4.pth OR models/RRDB_PSNR_x4.pth
 # philipedwards change begin
+# Work out the root directory of ESRGAN
+# this allows it to be executed from outside this directory.
+ESRGANPath = osp.realpath(__file__)
+ESRGANPath = ESRGANPath[:-len(osp.basename(ESRGANPath))]
+
+# models/RRDB_ESRGAN_x4.pth OR models/RRDB_PSNR_x4.pth
+modelfile = 'RRDB_ESRGAN_x4.pth'
 # Instructions say that this already existed, but I couldn't find it.
 # This allows you to specify the model as the first positional argument
 if len(sys.argv) > 1:
     print("model specified: " + sys.argv[1])
-    model_path = sys.argv[1]
+    modelfile = sys.argv[1]
+
+model_path = osp.join(ESRGANPath, 'models', modelfile)
 # philipedwards change end
 
-# philipedwards change begin
-# default to CPU based processing. Slower but more portable
-#device = torch.device('cuda')  # if you want to run on CPU, change 'cuda' -> cpu
-device = torch.device('cpu')
-# philipedwards change end
+device = torch.device('cuda')  # if you want to run on CPU, change 'cuda' -> cpu
 
-ESRGANPath = osp.realpath(__file__)
-ESRGANPath = ESRGANPath[:-len(osp.basename(ESRGANPath))]
 img_src_path = osp.join(ESRGANPath, 'LR/*')
 img_dst_path = osp.join(ESRGANPath, "results")
 print(img_src_path)
