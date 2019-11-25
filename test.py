@@ -23,7 +23,9 @@ if len(sys.argv) > 1:
 model_path = osp.join(ESRGANPath, 'models', modelfile)
 # philipedwards change end
 
-device = torch.device('cuda')  # if you want to run on CPU, change 'cuda' -> cpu
+device = torch.device('cpu')
+if torch.cuda.device_count() > 0:
+    device = torch.device('cuda')  # if you want to run on CPU, change 'cuda' -> cpu
 
 img_src_path = osp.join(ESRGANPath, 'LR/*')
 img_dst_path = osp.join(ESRGANPath, "results")
