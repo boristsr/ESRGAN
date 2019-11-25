@@ -25,7 +25,10 @@ model_path = osp.join(ESRGANPath, 'models', modelfile)
 
 device = torch.device('cpu')
 if torch.cuda.device_count() > 0:
+    print("Using CUDA device")
     device = torch.device('cuda')  # if you want to run on CPU, change 'cuda' -> cpu
+else:
+    print("No CUDA device found, using CPU fallback")
 
 img_src_path = osp.join(ESRGANPath, 'LR/*')
 img_dst_path = osp.join(ESRGANPath, "results")
